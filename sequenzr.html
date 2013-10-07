@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset='utf-8'>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Sequenzr - create PNG / JPEG Sequences directly in your browser.</title>
+		<meta name="description" content="Sequenzr allows you to create PNG / JPEG Sequences from PNG frames directly in your browser. Optionally it includes alpha channel." />
+		
+		<style>
+		html, body {
+			font-family: Helvetica, Arial, Tahoma;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+
+		.form-item {
+			margin: 10px 0;
+		}
+
+		ol li {
+			margin: 8px 0;
+		}
+
+		input[name="jpeg_quality"] + span {
+			margin-left: 10px;
+		}
+
+		#sequenzr {
+			background: #fbfbfb;
+			height: 100%;
+			left: 0;
+			padding: 0px 20px;
+			position: absolute;
+			top: 0;
+			width: 100%;
+			box-sizing: border-box;
+		}
+
+		#sequenzr.hover {
+			background: #e4e4e4;
+		}
+
+		#preview {
+			background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACpJREFUeNpi/P//PwM2cPbsWaziTAwkglENxAAWXOFtbGw8Gkr00wAQYAD5xAiGkcIskQAAAABJRU5ErkJggg==);
+		}
+		</style>
+    </head>
+    <body>
+        <div id="sequenzr">
+            <h1>Sequenzr</h1>
+			<p>Create Image (PNG/JPEG) Sequences in your browser (Chrome/Firefox, maybe works in IE10+).</p>
+            <fieldset>
+                <legend>Options</legend>
+                <form id="options">
+                    <div class="form-item">
+                        <input type="radio" name="format" value="jpg" checked="checked" /> JPG&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="format" value="png" /> PNG
+                    </div>
+
+                    <div class="form-item">
+                        <input type="checkbox" name="alpha_channel" checked="checked" /> Include Alpha Channel
+                    </div>
+
+                    <div class="form-item" id="png-options" style="display: none">
+                        <input type="checkbox" name="transparency" checked="checked" /> Transparency
+                    </div>
+
+                    <div class="form-item" id="jpg-options">
+                        JPEG Quality: <input type="range" name="jpg_compr" min="0" max="100" value="60" onchange="this.nextSibling.innerHTML=this.value" /><span>60</span>
+                    </div>
+                </form>
+
+            </fieldset>
+            <fieldset style="margin-top: 30px">
+                <legend>Preview</legend>
+                <img id="preview" src="images/alpha.jpg" />
+            </fieldset>
+
+            <div id="result"></div>
+
+            <h2>How does it work?</h2>
+            <ol>
+                <li>Specify options below.</li>
+                <li>Drag&amp;Drop image files right here (files will be sorted by name).</li>
+                <li>Save image to your disk.</li>
+            </ol>
+			
+			<p><small>*All frames should be the same size (here is an <a href="http://www.lindalino.com/labs/sequenzr-example.zip">example sequence</a>).</small></p>
+        </div>
+
+        <script src="sequenzr.js"></script>
+		
+		<a href="https://github.com/dmonin/sequenzr"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    </body>
+</html>
