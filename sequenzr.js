@@ -53,18 +53,20 @@ function getFrameRenderer(file, fileIndex)
         // Buffer canvas for current frame
         var bufCanvas = getBufferCanvas(img);
         var bufCtx = bufCanvas.getContext('2d');
+        var x = form.vertical.checked ? 0 : fileIndex * img.width;
+        var y = form.vertical.checked ? fileIndex * img.height : 0;
 
         // White Background
         if (isJpg || !form.transparency.checked)
         {
           ctx.fillStyle = '#fff';
-          ctx.fillRect(fileIndex * img.width, 0, img.width, img.height);
+          ctx.fillRect(x, y, img.width, img.height);
         }
 
         // Frame
         bufCanvas.width = bufCanvas.width;
         bufCtx.drawImage(img, 0, 0);
-        ctx.drawImage(bufCanvas, fileIndex * img.width, 0);
+        ctx.drawImage(bufCanvas, x, y);
 
         // Frame: Alpha Channel
         if (form.alpha_channel.checked)
@@ -82,9 +84,18 @@ function getFrameRenderer(file, fileIndex)
 
           bufCtx.putImageData(imgData, 0, 0);
 
+          if (form.vertical.checked)
+          {
+            x += img.width;
+          }
+          else
+          {
+            y += img.height;
+          }
+
           ctx.fillStyle = '#000';
-          ctx.fillRect(fileIndex * img.width, img.height, img.width, img.height);
-          ctx.drawImage(bufCanvas, fileIndex * img.width, img.height);
+          ctx.fillRect(x, y, img.width, img.height);
+          ctx.drawImage(bufCanvas, x, y);
         }
 
         // Output result image
@@ -101,16 +112,16 @@ function getFrameRenderer(file, fileIndex)
             {
               result.src = canvas.toDataURL("image/png");
             }
-			
+
 			dropArea.innerHTML = '';
-            dropArea.appendChild(result);
-			
+      dropArea.appendChild(result);
+
 			dropArea.appendChild(document.createElement('br'));
-			
+
 			var oneMore = document.createElement('a');
 			oneMore.href = document.location;
 			oneMore.innerHTML = 'one more?';
-			dropArea.appendChild(oneMore);						
+			dropArea.appendChild(oneMore);
 			dropArea.ondrop = null;
         }, 300);
       };
@@ -124,15 +135,29 @@ function getCanvas(img)
     if (!canvas)
     {
         canvas = document.createElement('canvas');
-        canvas.width = img.width * fileCount;
-        if (form.alpha_channel.checked)
+        var width = img.width;
+        var height = img.height;
+
+        if (form.vertical.checked)
         {
-          canvas.height = img.height * 2;
+          if (form.alpha_channel.checked)
+          {
+            width *= 2;
+          }
+          height *= fileCount;
         }
         else
         {
-          canvas.height = img.height;
+          if (form.alpha_channel.checked)
+          {
+            height *= 2;
+          }
+
+          width *= fileCount;
         }
+
+        canvas.width = width;
+        canvas.height = height;
     }
 
     return canvas;
@@ -181,7 +206,7 @@ function preview()
     }
     filename += 'transparency';
   }
-  
+
   // Format
   filename += isJpg ? '.jpg' : '.png';
 

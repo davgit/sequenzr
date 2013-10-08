@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>Sequenzr - create PNG / JPEG Sequences directly in your browser.</title>
 		<meta name="description" content="Sequenzr allows you to create PNG / JPEG Sequences from PNG frames directly in your browser. Optionally it includes alpha channel." />
-		
+
 		<style>
 		html, body {
 			font-family: Helvetica, Arial, Tahoma;
@@ -45,16 +45,6 @@
 			background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACpJREFUeNpi/P//PwM2cPbsWaziTAwkglENxAAWXOFtbGw8Gkr00wAQYAD5xAiGkcIskQAAAABJRU5ErkJggg==);
 		}
 		</style>
-		<script>
-		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-		  ga('create', 'UA-44684706-1', 'lindalino.com');
-		  ga('send', 'pageview');
-
-		</script>
     </head>
     <body>
         <div id="sequenzr">
@@ -76,6 +66,10 @@
                         <input type="checkbox" name="transparency" checked="checked" /> Transparency
                     </div>
 
+                    <div class="form-item">
+                        <input type="checkbox" name="vertical" /> Vertical
+                    </div>
+
                     <div class="form-item" id="jpg-options">
                         JPEG Quality: <input type="range" name="jpg_compr" min="0" max="100" value="60" onchange="this.nextSibling.innerHTML=this.value" /><span>60</span>
                     </div>
@@ -94,16 +88,16 @@
                 <li>Specify options above.</li>
                 <li>Drag&amp;Drop image files right here.</li>
                 <li>Save image to your disk.</li>
-            </ol>			
+            </ol>
 			<p><small>Files will be sorted by name and they should have same dimensions</small></p>
-			
+
 			<h2>Try it!</h2>
 			<p>Here are some <a href="http://www.lindalino.com/labs/sequenzr-example.zip">example</a> images.</p>
-			
+
         </div>
 
         <script src="sequenzr.js"></script>
-		
-		<a href="https://github.com/dmonin/sequenzr"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
+		<!--<a href="https://github.com/dmonin/sequenzr"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>-->
     </body>
 </html>
